@@ -11,6 +11,13 @@ resource "aws_security_group" "app" {
     protocol         = "tcp"
     cidr_blocks      = var.allow_cidr_blocks
   }
+  ingress {
+    description      = "HTTP"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = var.bastion_cidr
+  }
 
   egress {
     from_port        = 0
