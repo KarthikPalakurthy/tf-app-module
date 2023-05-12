@@ -12,7 +12,7 @@ resource "aws_security_group" "app" {
     cidr_blocks      = var.allow_cidr_blocks
   }
   ingress {
-    description      = "HTTP"
+    description      = "SSH"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
