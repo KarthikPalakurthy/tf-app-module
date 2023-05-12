@@ -36,6 +36,7 @@ resource "aws_launch_template" "main" {
   name_prefix   = "${var.env}-${var.component}-template"
   image_id      = data.aws_ami.centos8.id
   instance_type = var.instance_type
+  security_group_names = [aws_security_group.app.id]
 }
 
 resource "aws_autoscaling_group" "asg" {
@@ -45,6 +46,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity          = var.desired_capacity
   force_delete              = true
   vpc_zone_identifier       = var.subnet_ids
+
 
   launch_template {
     id = aws_launch_template.main.id
