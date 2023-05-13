@@ -99,12 +99,18 @@ resource "aws_iam_role_policy_attachment" "policy-attach" {
 
 
 resource "aws_launch_template" "main" {
-  name_prefix   = "${var.env}-${var.component}-template"
+  name   = "${var.env}-${var.component}-template"
   image_id      = data.aws_ami.centos8.id
   instance_type = var.instance_type
-  security_group_names = [aws_security_group.app.id]
+  vpc_security_group_ids = [aws_security_group.app.id]
+  user_data = base64decode(templatefile("${path.module}/user-data.sh", { component = var.component , env = var.env} ))
+
   iam_instance_profile {
     arn = aws_iam_instance_profile.profile.arn
+  }
+
+  instance_market_options {
+    market_type = "spot"
   }
 }
 
@@ -115,7 +121,6 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity          = var.desired_capacity
   force_delete              = true
   vpc_zone_identifier       = var.subnet_ids
-
 
   launch_template {
     id = aws_launch_template.main.id
