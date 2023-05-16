@@ -113,9 +113,9 @@ resource "aws_launch_template" "main" {
     arn = aws_iam_instance_profile.profile.arn
   }
 
-#  instance_market_options {
-#    market_type = "spot"
-#  }
+  instance_market_options {
+    market_type = "spot"
+  }
 }
 
 resource "aws_autoscaling_group" "asg" {
