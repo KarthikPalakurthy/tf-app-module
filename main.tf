@@ -143,10 +143,10 @@ resource "aws_autoscaling_group" "asg" {
   }
 }
 
-resource "aws_route53_record" "dns-servers" {
-  zone_id = "Z0636942108K930OU3P3D"
-  name    = "${var.component}-${var.env}.devpractice.online"
-  type    = "CNAME"
-  ttl     = 30
-  records = [var.alb]
-}
+#resource "aws_route53_record" "dns-servers" {
+#  zone_id = "Z0636942108K930OU3P3D"
+#  name    = "${var.component}-${var.env}.devpractice.online"
+#  type    = "CNAME"
+#  ttl     = 30
+#  records = [var.alb]
+#}
