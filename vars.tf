@@ -10,3 +10,4 @@ variable "min_size" {}
 variable "instance_type" {}
 variable "bastion_cidr" {}
 variable "alb" {}
+variable "listener" {}
