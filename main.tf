@@ -169,3 +169,18 @@ resource "aws_lb_target_group" "test" {
   }
 }
 
+resource "aws_lb_listener_rule" "static" {
+  count        = var.port_number == 8080 ? 1 : 0
+  listener_arn = var.listener
+  priority     = var.priority
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.test.arn
+  }
+  condition {
+    host_header {
+      values = ["${var.component}-${var.env}.devpractice.online"]
+    }
+  }
+}
