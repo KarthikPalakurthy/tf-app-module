@@ -170,7 +170,7 @@ resource "aws_lb_target_group" "test" {
 }
 
 resource "aws_lb_listener_rule" "backend" {
-  count        = var.listener != 0 ? 1 : 0
+  count        = var.priority != 0 ? 1 : 0
   listener_arn = var.listener
   priority     = var.priority
 
@@ -186,7 +186,7 @@ resource "aws_lb_listener_rule" "backend" {
 }
 
 resource "aws_lb_listener" "frontend" {
-  count = var.listener == 0 ? 1 : 0
+  count = var.priority == 0 ? 1 : 0
   load_balancer_arn = var.alb_arn
   port              = "80"
   protocol          = "HTTP"
