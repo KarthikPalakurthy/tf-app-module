@@ -12,3 +12,4 @@ variable "bastion_cidr" {}
 variable "alb" {}
 variable "listener" {}
 variable "priority" {}
+variable "alb_arn" {}

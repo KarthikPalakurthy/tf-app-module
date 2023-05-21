@@ -169,7 +169,7 @@ resource "aws_lb_target_group" "test" {
   }
 }
 
-resource "aws_lb_listener_rule" "static" {
+resource "aws_lb_listener_rule" "backend" {
   count        = var.port_number == 8080 ? 1 : 0
   listener_arn = var.listener
   priority     = var.priority
@@ -182,5 +182,17 @@ resource "aws_lb_listener_rule" "static" {
     host_header {
       values = ["${var.component}-${var.env}.devpractice.online"]
     }
+  }
+}
+
+resource "aws_lb_listener" "frontend" {
+  count = var.listener ==0 ? 1 : 0
+  load_balancer_arn = var.alb_arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.test.arn
   }
 }
