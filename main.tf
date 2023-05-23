@@ -18,13 +18,13 @@ resource "aws_security_group" "app" {
     protocol         = "tcp"
     cidr_blocks      = var.bastion_cidr
   }
-  ingress {
-    description      = "PROMETHEUS"
-    from_port        = 9100
-    to_port          = 9100
-    protocol         = "tcp"
-    cidr_blocks      = var.monitor_cidr
-  }
+#  ingress {
+#    description      = "PROMETHEUS"
+#    from_port        = 9100
+#    to_port          = 9100
+#    protocol         = "tcp"
+#    cidr_blocks      = var.monitor_cidr
+#  }
 
   egress {
     from_port        = 0
