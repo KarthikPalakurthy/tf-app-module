@@ -13,4 +13,4 @@ variable "alb" {}
 variable "listener" {}
 variable "priority" {}
 variable "alb_arn" {}
-#variable "monitor_cidr" {}
+variable "monitor_cidr" {}
