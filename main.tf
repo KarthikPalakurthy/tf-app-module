@@ -92,8 +92,6 @@ resource "aws_iam_policy" "policy" {
                     "arn:aws:ssm:us-east-1:515990482874:parameter/${var.env}.elasticache*",
                     "arn:aws:ssm:us-east-1:515990482874:parameter/${var.env}.rds*",
                     "arn:aws:ssm:us-east-1:515990482874:parameter/grafana*"
-
-
         ]
       },
       {
