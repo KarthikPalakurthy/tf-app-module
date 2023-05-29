@@ -188,6 +188,7 @@ resource "aws_lb_target_group" "test" {
     protocol = "HTTP"
     timeout = 2
   }
+  deregistration_delay = 10
 }
 
 resource "aws_lb_listener_rule" "backend" {
