@@ -210,11 +210,30 @@ resource "aws_lb_listener_rule" "backend" {
 resource "aws_lb_listener" "frontend" {
   count = var.priority == 0 ? 1 : 0
   load_balancer_arn = var.alb_arn
-  port              = "80"
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy = "ELBSecurityPolicy-2016-08"
+  certificate_arn = "arn:aws:acm:us-east-1:515990482874:certificate/53c342ad-8cc1-4245-b1f2-36ee1136811b"
 
   default_action {
     type = "forward"
     target_group_arn = aws_lb_target_group.test.arn
+  }
+}
+
+resource "aws_lb_listener" "frontend" {
+  count = var.priority == 0 ? 1 : 0
+  load_balancer_arn = var.alb_arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+  }
+
+  redirect {
+    port = "443"
+    protocol = "HTTPS"
+    status_code = "HTTP_301"
   }
 }
