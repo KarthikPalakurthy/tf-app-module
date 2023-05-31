@@ -221,7 +221,7 @@ resource "aws_lb_listener" "frontend" {
   }
 }
 
-resource "aws_lb_listener" "frontend" {
+resource "aws_lb_listener" "listener" {
   count = var.priority == 0 ? 1 : 0
   load_balancer_arn = var.alb_arn
   port              = "80"
